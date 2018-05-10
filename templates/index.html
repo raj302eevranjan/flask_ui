@@ -96,9 +96,9 @@ label{
                 </div>
         </div>
         <div class="col-sm-6" style="text-align: center;">
-            <div id="removed_label_image">
-                <p>Image with removed label</p>
-                <img src="{{ url_for('static',filename='enhanced/1.png') }}" alt="removed label image" style="height: 300px; width: 300px;"> 
+            <div id="segmented_image">
+                <p>Segmented image</p>
+                <img src="{{ url_for('static',filename='segmented/1.png') }}" alt="removed label image" style="height: 300px; width: 300px;"> 
                 <!-- TODO -->
             </div>
         </div>
@@ -107,35 +107,32 @@ label{
     <hr>
 
     <div class="row">
-        <div class="col-sm-6" style="text-align: center;">
-            <div id="segmented_image">
-                <p>Segmented Image</p>
-                <img src="{{ url_for('static',filename='segmented/1.png') }}" alt="segmented" style="height: 300px; width: 300px;">
-            </div>
-        </div>
-        <div class="col-sm-6" id="predicted_values" style="margin-top: 20px;">
+        <div class="col-sm-12" id="predicted_values" style="margin-top: 20px;">
             <div class="row">
                 <div class="col-sm-3"></div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                         <p style="color: orange;">Tumour type&nbsp;:</p>
                 </div>
-                <div class="col-sm-3" style="color: white;">{{pType}}</div>
+                <div class="col-sm-2" style="color: white;">{{pType}}</div>
+                <div class="col-sm-2" style="color: white;">{{pType1}}</div>
                 <div class="col-sm-3"></div>
             </div>
             <div class="row">
                 <div class="col-sm-3"></div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                         <p style="color: orange;">Background tissue&nbsp;:</p>
                 </div>
-                <div class="col-sm-3" style="color: white;">{{pBack}}</div>
+                <div class="col-sm-2" style="color: white;">{{pBack}}</div>
+                <div class="col-sm-2" style="color: white;">{{pBack1}}</div>
                 <div class="col-sm-3"></div>
             </div>
             <div class="row">
                 <div class="col-sm-3"></div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                         <p style="color: orange;">Deformity&nbsp;:</p>
                 </div>
-                <div class="col-sm-3" style="color: white;">{{pAbnorm}}</div>
+                <div class="col-sm-2" style="color: white;">{{pAbnorm}}</div>
+                <div class="col-sm-2" style="color: white;">{{pAbnorm1}}</div>
                 <div class="col-sm-3"></div>
             </div>
             <!-- <div id="predicted_values">
