@@ -3,7 +3,6 @@ import predict_7_stages as p7s
 import predict_benign_normal_malignant as bnm
 import predict_dense_fatty_glandular as dfg
 import os
-from random import random
 
 app = Flask(__name__)
 

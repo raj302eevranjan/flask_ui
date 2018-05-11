@@ -81,8 +81,8 @@ label{
                 <div style="text-align: center;">
                              <div id="original_image_border">
                                  <p id="patient_id_text">Patient id = {{path}}</p>
-                                 {% set path = url_for('static',filename='original/{}.png'.format(path)) %}
-                                 <img src = "{{ path }}" alt="originl image" style="height: 300px; width: 300px;"/>
+                                 {% set path_original_image = url_for('static',filename='original/{}.png'.format(path)) %}
+                                 <img src = "{{ path_original_image }}" alt="originl image" style="height: 300px; width: 300px;"/>
                              </div>
                  </div>
         </div>
@@ -93,13 +93,15 @@ label{
         <div class="col-sm-6" style="text-align: center;">
                 <div id="enhanced_image">
                     <p>Enhanced Image</p>
-                    <img src="{{ url_for('static',filename='enhanced/1.png') }}" alt="enhanced" style="height: 300px; width: 300px;">
+                    {% set path_enhance_image = url_for('static',filename='enhanced/{}.png'.format(path)) %}
+                    <img src="{{ path_enhance_image }}" alt="enhanced" style="height: 300px; width: 300px;">
                 </div>
         </div>
         <div class="col-sm-6" style="text-align: center;">
             <div id="segmented_image">
                 <p>Segmented image</p>
-                <img src="{{ url_for('static',filename='segmented/1.png') }}" alt="removed label image" style="height: 300px; width: 300px;"> 
+                {% set path_segmented_image = url_for('static',filename='segmented/{}.png'.format(path)) %}
+                <img src="{{ path_segmented_image }}" alt="removed label image" style="height: 300px; width: 300px;"> 
                 <!-- TODO -->
             </div>
         </div>

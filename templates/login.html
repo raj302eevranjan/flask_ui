@@ -44,10 +44,13 @@ label{
 
     <div>
           <div class="center">
-              {% if msg=="invalid" %}
-              <P>Username or password is not correct</P>
-              {% endif %}
                         <form action="/logged_in" method="post" style="text-align: center;">
+                            {% if msg=="invalid" %}
+                            <!-- <P style="color: cyan;">Username or password is not correct</P> -->
+                            <script>
+                                alert("invalid username or password");
+                            </script>
+                            {% endif %}
                             <label for="username" style="margin-top: 20px; margin-bottom: 20px;">username &nbsp;&nbsp;</label>
                             <input type="text" name="username" style="width: 300px;"/><br />
                             <label for="password" style="margin-top: 20px; margin-bottom: 20px;">Password &nbsp;&nbsp;</label>
