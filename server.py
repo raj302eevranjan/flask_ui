@@ -8,7 +8,20 @@ app = Flask(__name__)
 
 @app.route('/')
 def root():
-    return render_template('index.html', path = None)
+    return render_template('login.html')
+
+@app.route('/logged_in', methods=['POST'])
+def login_in():
+    username = request.form['username']
+    password = request.form['password']
+    if username=="admin" and password=="admin":
+        return render_template('index.html', path = None)
+    else:
+        return render_template('login.html', msg="invalid")
+
+@app.route('/logout')
+def logout():
+    return render_template('login.html')
 
 
 @app.route('/process', methods=['POST'])

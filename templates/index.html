@@ -46,8 +46,7 @@ label{
         {% if path == None %}
 
           <div class="center">
-
-                        <form action="/process" method="post">
+                        <form action="/process" method="post" style="text-align: center;">
                             <label for="id" style="margin-top: 20px; margin-bottom: 20px;">Patient Id &nbsp;&nbsp;</label>
                             <input type="number" list="patientid" name="name" min="1" max="322" style="width: 300px;"/>
                             <datalist id="patientid">
@@ -55,26 +54,28 @@ label{
                                 <option value="{{i}}">{{i}}</option>
                                 {% endfor %}
                             </datalist> &nbsp;&nbsp;
-                            <input type="submit" value="submit">
+                            <input type="submit" value="submit"><br />
+                            <a href="/logout" class="btn btn-primary">Logout</a>
                         </form>
 
                 </div>
         {% else %}
             <div class="container">
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-sm-12" style="text-align: center;">
-                    <form action="/process" method="post">
-                        <label for="id" style="margin-top: 20px; margin-bottom: 20px;">Patient Id &nbsp;&nbsp;</label>
-                        <input type="number" list="patientid" name="name" min="1" max="322" style="width: 300px;"/>
-                        <datalist id="patientid">
-                            {% for i in range(1, 323) %}
-                            <option value="{{i}}">{{i}}</option>
-                            {% endfor %}
-                        </datalist> &nbsp;&nbsp;
-                        <input type="submit" value="submit">
-                    </form>
-            </div>
-        </div>
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-12" style="text-align: center;">
+                            <form action="/process" method="post">
+                                <label for="id" style="margin-top: 20px; margin-bottom: 20px;">Patient Id &nbsp;&nbsp;</label>
+                                <input type="number" list="patientid" name="name" min="1" max="322" style="width: 300px;"/>
+                                <datalist id="patientid">
+                                    {% for i in range(1, 323) %}
+                                    <option value="{{i}}">{{i}}</option>
+                                    {% endfor %}
+                                </datalist> &nbsp;&nbsp;
+                                <input type="submit" value="submit"><br />
+                                <a href="/logout" class="btn btn-primary" style="margin-bottom: 20px;">Logout</a>
+                            </form>
+                    </div>
+                </div>
 
         <div class="row">
                 <div style="text-align: center;">
