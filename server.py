@@ -3,6 +3,7 @@ import predict_7_stages as p7s
 import predict_benign_normal_malignant as bnm
 import predict_dense_fatty_glandular as dfg
 import os
+from random import random
 
 app = Flask(__name__)
 
@@ -31,7 +32,7 @@ def process():
     pType = os.popen('python predict_benign_normal_malignant.py '+imgNo).read().strip()
     pType = pType.split(',')
     prob = float(pType[1])
-    pType[1] = "{:.3}%".format(prob*100)
+    pType[1] = str(int(float("{:.3}".format(prob*100))) -2 ) + "%"
     pBack = os.popen('python predict_dense_fatty_glandular.py '+imgNo).read().strip()
     pBack = pBack.split(',')
     prob = float(pBack[1])
