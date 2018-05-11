@@ -15,6 +15,7 @@ from keras.layers.core import Activation, Flatten, Dense, Dropout
 from keras.callbacks import ModelCheckpoint
 import matplotlib.pyplot as plt
 # from keras import backend as Kback
+from keras.utils import plot_model
 
 def build_model(hight, weight, num_classes):
     model = Sequential()
@@ -141,7 +142,7 @@ def get_data(imageShape):
 # ---------------- Training -------------------------
 
 # Hyperparameters
-epochs = 5
+epochs = 1
 batch_size = 32
 imageShape = (224, 224)
 
@@ -172,24 +173,26 @@ def train():
           validation_data= (x_test, y_test))
     print('Training Completed')
 
+    plot_model(model, to_file="model.png")
+
     print(history.history.keys())
 
-    # summarize history for accuracy
-    plt.plot(history.history['acc'])
-    plt.plot(history.history['val_acc'])
-    plt.title('model accuracy')
-    plt.ylabel('accuracy')
-    plt.xlabel('epoch')
-    plt.legend(['train', 'test'], loc='upper left')
-    plt.show()
-    # summarize history for loss
-    plt.plot(history.history['loss'])
-    plt.plot(history.history['val_loss'])
-    plt.title('model loss')
-    plt.ylabel('loss')
-    plt.xlabel('epoch')
-    plt.legend(['train', 'test'], loc='upper left')
-    plt.show()
+    # # summarize history for accuracy
+    # plt.plot(history.history['acc'])
+    # plt.plot(history.history['val_acc'])
+    # plt.title('model accuracy')
+    # plt.ylabel('accuracy')
+    # plt.xlabel('epoch')
+    # plt.legend(['train', 'test'], loc='upper left')
+    # plt.show()
+    # # summarize history for loss
+    # plt.plot(history.history['loss'])
+    # plt.plot(history.history['val_loss'])
+    # plt.title('model loss')
+    # plt.ylabel('loss')
+    # plt.xlabel('epoch')
+    # plt.legend(['train', 'test'], loc='upper left')
+    # plt.show()
 
     # print('Testing with train data:')
     # score_train = model.evaluate(x_train, y_train, verbose=1)
