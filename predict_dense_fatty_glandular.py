@@ -25,18 +25,18 @@ def build_model(hight, weight, num_classes):
     # Layer 2
     model.add(Conv2D(4, (3,3), padding="same"))
     model.add(LeakyReLU(alpha=0.03))
-    model.add(AveragePooling2D())
+    model.add(MaxPooling2D())
     
 
     # Layer 3
     model.add(Conv2D(4, (3,3), padding="same"))
     model.add(LeakyReLU(alpha=0.03))
-    model.add(AveragePooling2D())
+    model.add(MaxPooling2D())
 
     # Layer 4
     model.add(Conv2D(4, (3,3), padding="same"))
     model.add(LeakyReLU(alpha=0.03))
-    model.add(AveragePooling2D())
+    model.add(MaxPooling2D())
 
     # Layer 5
     model.add(Conv2D(4, (3,3), padding="same"))
@@ -45,7 +45,7 @@ def build_model(hight, weight, num_classes):
     # Layer 6
     model.add(Conv2D(4, (3,3), padding="same"))
     model.add(LeakyReLU(alpha=0.03))
-    model.add(AveragePooling2D())
+    model.add(MaxPooling2D())
 
 
     # Fully Connected Layer
