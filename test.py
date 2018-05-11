@@ -1,7 +1,5 @@
 from __future__ import print_function
 
-import os
-
 import cv2 as cv
 import numpy as np
 
@@ -15,28 +13,28 @@ from keras.layers.core import Activation, Flatten, Dense, Dropout
 from keras.callbacks import ModelCheckpoint
 # from keras import backend as Kback
 
-def build_model(hight, weight, num_classes):
+def build_model(height, weight, num_classes):
     model = Sequential()
 
     # Layer 1
-    model.add(Conv2D(4, (3,3), padding="same", input_shape = (hight, weight, 1)))
+    model.add(Conv2D(4, (3,3), padding="same", input_shape = (height, weight, 1)))
     model.add(LeakyReLU(alpha=0.03))
 
     # Layer 2
     model.add(Conv2D(4, (3,3), padding="same"))
     model.add(LeakyReLU(alpha=0.03))
-    model.add(AveragePooling2D())
+    model.add(MaxPooling2D())
     
 
     # Layer 3
     model.add(Conv2D(4, (3,3), padding="same"))
     model.add(LeakyReLU(alpha=0.03))
-    model.add(AveragePooling2D())
+    model.add(MaxPooling2D())
 
     # Layer 4
     model.add(Conv2D(4, (3,3), padding="same"))
     model.add(LeakyReLU(alpha=0.03))
-    model.add(AveragePooling2D())
+    model.add(MaxPooling2D())
 
     # Layer 5
     model.add(Conv2D(4, (3,3), padding="same"))
@@ -45,7 +43,12 @@ def build_model(hight, weight, num_classes):
     # Layer 6
     model.add(Conv2D(4, (3,3), padding="same"))
     model.add(LeakyReLU(alpha=0.03))
-    model.add(AveragePooling2D())
+    model.add(MaxPooling2D())
+
+    # Layer 7
+    model.add(Conv2D(4, (3,3), padding="same"))
+    model.add(LeakyReLU(alpha=0.03))
+    model.add(MaxPooling2D())
 
 
     # Fully Connected Layer
@@ -91,37 +94,48 @@ def get_data(imageShape):
 
         return imgs, labels
 
-    benign_file = open('dataset/benign.txt')
-    malignant_file = open('dataset/malignant.txt')
-    normal_file = open('dataset/normal.txt')
+    arch_file = open('dataset/ARCH.txt')
+    asym_file = open('dataset/ASYM.txt')
+    calc_file = open('dataset/CALC.txt')
+    circ_file = open('dataset/CIRC.txt')
+    norm_file = open('dataset/NORM.txt')
+    misc_file = open('dataset/MISC.txt')
+    spic_file = open('dataset/SPIC.txt')
 
-    benign = [line.strip() for line in benign_file.readlines()]
+    arch = [line.strip() for line in arch_file.readlines()]
+    asym = [line.strip() for line in asym_file.readlines()]
+    calc = [line.strip() for line in calc_file.readlines()]
+    circ = [line.strip() for line in circ_file.readlines()]
+    norm = [line.strip() for line in norm_file.readlines()]
+    misc = [line.strip() for line in misc_file.readlines()]
+    spic = [line.strip() for line in spic_file.readlines()]
 
-    malignant = [line.strip() for line in malignant_file.readlines()]
-
-    normal = [line.strip() for line in normal_file.readlines()]
-
-    # benign_img = [ cv.imread('dataset/{}.pgm'.format(no)) for no in benign ]
-    # benign_label = [ [0,1,0] for _ in xrange(len(benign)) ]
-    benign_img, benign_label = read_from(benign, [0,1,0])
-
-    # malignant_img = [ cv.imread('dataset/{}.pgm'.format(no)) for no in malignant ]
-    # malignant_label = [ [0,0,1] for _ in xrange(len(malignant)) ]
-    malignant_img, malignant_label = read_from(malignant, [0,0,1])
-
-    # normal_img = [ cv.imread('dataset/{}.pgm'.format(no)) for no in normal ]
-    # normal_label = [ [1,0,0] for _ in xrange(len(normal)) ]
-    normal_img, normal_label = read_from(normal, [1,0,0])
+    arch_img, arch_label = read_from(arch, [1,0,0,0,0,0,0])
+    asym_img, asym_label = read_from(asym, [0,1,0,0,0,0,0])
+    calc_img, calc_label = read_from(calc, [0,0,1,0,0,0,0])
+    circ_img, circ_label = read_from(circ, [0,0,0,1,0,0,0])
+    norm_img, norm_label = read_from(norm, [0,0,0,0,1,0,0])
+    misc_img, misc_label = read_from(misc, [0,0,0,0,0,1,0])
+    spic_img, spic_label = read_from(spic, [0,0,0,0,0,0,1])
 
     x = []
-    x.extend(benign_img)
-    x.extend(malignant_img)
-    x.extend(normal_img)
+    x.extend(arch_img)
+    x.extend(asym_img)
+    x.extend(calc_img)
+    x.extend(circ_img)
+    x.extend(norm_img)
+    x.extend(misc_img)
+    x.extend(spic_img)
 
     y = []
-    y.extend(benign_label)
-    y.extend(malignant_label)
-    y.extend(normal_label)
+    y.extend(arch_label)
+    y.extend(asym_label)
+    y.extend(calc_label)
+    y.extend(circ_label)
+    y.extend(norm_label)
+    y.extend(misc_label)
+    y.extend(spic_label)
+
     shuffle(x, y)
 
     train_size = int(len(x) * 0.99)
@@ -145,7 +159,7 @@ batch_size = 32
 imageShape = (224, 224)
 
 # Model
-model = build_model(imageShape[0], imageShape[1], 3)
+model = build_model(imageShape[0], imageShape[1], 7)
 # Compiling Model
 print('Done Building Model...')
 
@@ -161,9 +175,9 @@ def train():
     print('Training...')
 
     # Storing best save only weights
-    checkpointer = ModelCheckpoint(filepath='benign_malignant_normal.hdf5', verbose=1, save_best_only=True)
+    checkpointer = ModelCheckpoint(filepath='seven_stages.hdf5', verbose=1, save_best_only=True)
 
-    history = model.fit(x_train, y_train,
+    model.fit(x_train, y_train,
           batch_size=batch_size,
           epochs=epochs,
           verbose=1,
@@ -177,31 +191,55 @@ def train():
     print('Testing with test data:')
     score_test = model.evaluate(x_test, y_test, verbose=1)
 
-    history_file = np.array(history.history['acc'])
-    np.save("bengin_normal_malignant.npy", history_file)
+    end = datetime.now()
 
+    history_file = np.array(history.history['acc'])
+    np.save("7stages.npy", history_file)
+    # print()
+    # print('Time Took for training and testing: {}'.format(str(end - start)))
+    # print('Test Loss: {}'.format(score_test[0]))
+    # print('Test Accuracy: {}'.format(score_test[1]))
+    # print()
+    # print('Train Loss: {}'.format(score_train[0]))
+    # print('Train Accuracy: {}'.format(score_train[1]))
 
 def test(weights_file):
     start = datetime.now()
-    wpath = "weights_try6.hdf5"
-    ipath = glob(os.path.join("dataset", "*.pgm"))
-    arrList = []
-
-    for path in ipath:
-        img = cv.imread(path)
-        img = cv.resize(img, (imageShape))
-        arrList.append(img)
-
-    x_test = np.array(arrList)
-
-    x_test = x_test.astype('float32')
-    x_test /= 255
-
     model.load_weights(weights_file)
 
-    output = model.predict_classes(x_test, verbose=1)
-    print(output)
+    print('Testing with train data:')
+    score_train = model.evaluate(x_train, y_train, verbose=1)
 
+    print('Testing with test data:')
+    score_test = model.evaluate(x_test, y_test, verbose=1)
+    end = datetime.now()
+
+
+    print('Time Took for training and testing: {}'.format(str(end - start)))
+    print('Test Loss: {}'.format(score_test[0]))
+    print('Test Accuracy: {}'.format(score_test[1]))
+    print()
+    print('Train Loss: {}'.format(score_train[0]))
+    print('Train Accuracy: {}'.format(score_train[1]))
 
 train()
 # test('Weight-0.85.hdf5')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

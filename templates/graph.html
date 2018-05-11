@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}"> -->
+<style>
+body{
+    background: white;
+}
+img{
+    border: 3px solid orange;
+    padding: 5px;
+}
+p{
+    color: white;
+}
+label{
+    color: white;
+}
+</style>
+</head>
+<body>
+
+    <div> 
+
+            <div class="container">
+                <div class="row" style="margin-top: 20px;">
+                        <div style="text-align: center;">
+                                    <div id="original_image_border">
+                                        <p id="tumour_type_graph">Tumour_type</p>
+                                        {% set path_tumour_type = url_for('static',filename='graph/{}.png'.format("tumour_type")) %}
+                                        <img src = "{{ path_tumour_type }}" alt="graph for tumour type" style="height: 500px; width: 500px;"/>
+                                    </div>
+                        </div>
+                </div>
+
+    <hr>
+
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-sm-6" style="text-align: center;">
+                <div id="enhanced_image">
+                    <p>Background tissue</p>
+                    {% set path_background_tissue = url_for('static',filename='graph/{}.png'.format("background_tissue")) %}
+                    <img src="{{ path_background_tissue }}" alt="graph for background tissue" style="height: 500px; width: 500px;">
+                </div>
+        </div>
+        <div class="col-sm-6" style="text-align: center;">
+            <div id="segmented_image">
+                <p>7 stage</p>
+                {% set path_7_stage = url_for('static',filename='graph/{}.png'.format("7_stage")) %}
+                <img src="{{ path_7_stage }}" alt="graph for 7 stage" style="height: 500px; width: 500px;"> 
+                <!-- TODO -->
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            {% set path_model_image = url_for('static',filename='graph/{}.png'.format("model")) %}
+            <img src="{{ path_model_image }}" alt="model image">
+        </div>
+        <div class="col-sm-3"></div>
+    </div> -->
+</div>
+    </div>
+</body>
+</html>

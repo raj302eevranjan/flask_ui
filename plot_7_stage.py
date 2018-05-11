@@ -1,9 +1,9 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-arr = np.load('plot_fat_dense_glandular.npy')
+arr = np.load('7stages.npy')
 plt.plot(arr)
-plt.title("Accuracy graph for Background tissue")
+plt.title("accuracy for 7 stage")
 plt.xlabel("epochs")
 plt.ylabel("accuracy")
 plt.show()

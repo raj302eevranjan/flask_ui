@@ -23,6 +23,10 @@ def login_in():
 def logout():
     return render_template('login.html')
 
+@app.route('/graphs')
+def show_graphs():
+    return render_template('graph.html')
+
 
 @app.route('/process', methods=['POST'])
 def process():
