@@ -32,17 +32,46 @@ label{
     <div> 
 
             <div class="container">
-                <div class="row" style="margin-top: 20px;">
+                <div class="row">
+                    <div class="col-sm-12" style="text-align: center;">
+                        <p style="color: black; margin-bottom: 0px; margin-top: 20px; font-weight: bold; font-size: 25px;">Model Accuracy graph for tumour type with different epoch</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
                         <div style="text-align: center;">
-                                    <div id="original_image_border">
-                                        <p id="tumour_type_graph">Tumour_type</p>
-                                        {% set path_tumour_type = url_for('static',filename='graph/{}.png'.format("tumour_type")) %}
-                                        <img src = "{{ path_tumour_type }}" alt="graph for tumour type" style="height: 500px; width: 500px;"/>
-                                    </div>
+                            <p id="tumour_type_graph">Tumour_type</p>
+                            {% set path_tumour_type = url_for('static',filename='graph/{}.png'.format("tumor_type_with_epoch_10")) %}
+                            <img src="{{ path_tumour_type }}" alt="graph for tumour type" style="height: 500px; width: 500px;" />
                         </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div style="text-align: center;">
+                            <p id="tumour_type_graph">Tumour_type</p>
+                            {% set path_tumour_type = url_for('static',filename='graph/{}.png'.format("tumor_type_with_epoch_20")) %}
+                            <img src="{{ path_tumour_type }}" alt="graph for tumour type" style="height: 500px; width: 500px;" />
+                        </div>
+                    </div>
                 </div>
 
-    <hr>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-6">
+                        <div style="text-align: center;">
+                            <p id="tumour_type_graph">Tumour_type</p>
+                            {% set path_tumour_type = url_for('static',filename='graph/{}.png'.format("tumor_type_with_epoch_40")) %}
+                            <img src="{{ path_tumour_type }}" alt="graph for tumour type" style="height: 500px; width: 500px;" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div style="text-align: center;">
+                            <p id="tumour_type_graph">Tumour_type</p>
+                            {% set path_tumour_type = url_for('static',filename='graph/{}.png'.format("tumor_type_with_epoch_50")) %}
+                            <img src="{{ path_tumour_type }}" alt="graph for tumour type" style="height: 500px; width: 500px;" />
+                        </div>
+                    </div>
+                </div>
+
+    <hr style="color: black; border-top: 2px solid black;">
 
     <div class="row" style="margin-bottom: 20px;">
         <div class="col-sm-6" style="text-align: center;">
