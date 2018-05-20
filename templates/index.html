@@ -80,13 +80,49 @@ label{
                 </div>
 
         <div class="row">
-                <div style="text-align: center;">
-                             <div id="original_image_border">
-                                 <p id="patient_id_text">Patient id = {{path}}</p>
-                                 {% set path_original_image = url_for('static',filename='original/{}.png'.format(path)) %}
-                                 <img src = "{{ path_original_image }}" alt="originl image" style="height: 300px; width: 300px;"/>
-                             </div>
-                 </div>
+            <div class="col-sm-6" style="text-align: center;">
+                <div id="original_image_border">
+                    <p id="patient_id_text">Patient id = {{path}}</p>
+                    {% set path_original_image = url_for('static',filename='original/{}.png'.format(path)) %}
+                    <img src="{{ path_original_image }}" alt="originl image" style="height: 300px; width: 300px;" />
+                </div>
+            </div>
+            <div class="col-sm-6" style="text-align: center; margin-top: 20px;">
+                <div id="patient_info">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <p>Name&nbsp;:</p>
+                        </div>
+                        <div class="col-sm-8">
+                            <p>{{name}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <p>Age&nbsp;:</p>
+                        </div>
+                        <div class="col-sm-8">
+                            <p>{{age}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <p>Sex&nbsp;:</p>
+                        </div>
+                        <div class="col-sm-8">
+                            <p>{{sex}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <p>Medical Record&nbsp;:</p>
+                        </div>
+                        <div class="col-sm-8">
+                            <p>{{medical_info}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     <hr>

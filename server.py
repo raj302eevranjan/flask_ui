@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import predict_7_stages as p7s
 import predict_benign_normal_malignant as bnm
 import predict_dense_fatty_glandular as dfg
+import read_medical_record as rmd
 import os
 
 app = Flask(__name__)
@@ -44,10 +45,13 @@ def process():
     pAbnorm = pAbnorm.split(',')
     prob = float(pAbnorm[1])
     pAbnorm[1] = "{:.3}%".format(prob*100)
+
+    medical_info = rmd.read_data(imgNo)
     return render_template('index.html', path = imgNo,
                             pType = pType[0], pType1 = pType[1],
                             pBack = pBack[0], pBack1 = pBack[1],
-                            pAbnorm = pAbnorm[0],pAbnorm1 = pAbnorm[1])
+                            pAbnorm = pAbnorm[0],pAbnorm1 = pAbnorm[1],
+                            name=medical_info[1], age=medical_info[2], sex=medical_info[3], medical_info=medical_info[4])
 
 if __name__ == "__main__":
     p7s.load()
